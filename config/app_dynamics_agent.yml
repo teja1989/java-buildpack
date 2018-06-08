@@ -22,10 +22,10 @@ default_application_name: $(ruby -e "require 'json' ; a = JSON.parse(ENV['VCAP_A
 #default_node_name: $(ruby -e "require 'json' ; a = JSON.parse(ENV['VCAP_APPLICATION']); 
  # puts \"#{a('application_uris'.split('.').[1])}:#{a['application_name']}:#{a['instance_index']}\"")
 #default_tier_name: 
-a: $(ruby -e "require 'json' ; a = JSON.parse(ENV['VCAP_APPLICATION']); 
+appname: $(ruby -e "require 'json' ; a = JSON.parse(ENV['VCAP_APPLICATION']); 
   puts \"#{a['application_name']}:#{a['instance_index']}\"")
 
-b: $(ruby -e "require 'json' ; b = JSON.parse(ENV['VCAP_SERVICES']);
-  puts \"#{a[DC']}\"")
+dcname: $(ruby -e "require 'json' ; b = JSON.parse(ENV['VCAP_SERVICES']);
+  puts \"#{b[DC']}\"")
 
-default_node_name: $($a:$b)
+default_node_name: $($appname:$dcname)
